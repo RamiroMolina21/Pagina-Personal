@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Ramiro Molina</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <canvas id="portfolioCanvas"></canvas>
+        <div class="content">
+            <header>
+                <h1>Hi, I'm <span>Ramiro Molina</span></h1>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <main>
+                <section id="about" class="section">
+                    <h2>About Me</h2>
+                    <div class="about-container">
+                        <div class="about-image">
+                            <img src="/imgenes/Imagen de WhatsApp 2025-05-25 a las 09.56.09_83cdc033.jpg" alt="Profile Image">
+                        </div>
+                        <div class="about-content">
+                            <h3>Systems Engineer Student</h3>
+                            <p>I'm a Systems Engineering student(junior level). 
+                                I'm passionate about problem-solving and continuous learning, always eager 
+                                to expand my technical and personal skills. I have a growing interest 
+                                in software development, artificial intelligence, and cybersecurity, 
+                                but I remain open to exploring various areas within the tech field.
+                                I enjoy working in teams, sharing ideas, and learning from others. 
+                                I consider myself proactive, curious, and dedicated to my education. 
+                                My goal is to become a professional who can provide innovative and 
+                                efficient solutions to the challenges of today's world. </p>
+                            <div class="about-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-code"></i>
+                                    <span>Full Stack Development</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Mobile Development</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-database"></i>
+                                    <span>Database Design</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-cloud"></i>
+                                    <span>Cloud Solutions</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="projects" class="section">
+                    <h2>Projects</h2>
+                    <div class="projects-grid">
+                        <!-- Project cards will be added dynamically -->
+                    </div>
+                </section>
+                <section id="skills" class="section">
+                    <h2>Skills</h2>
+                    <div class="skills-container">
+                        <!-- Skills will be added dynamically -->
+                    </div>
+                </section>
+                <section id="tools" class="section">
+                    <h2>Development Tools</h2>
+                    <div class="tools-container">
+                        <div class="tools-category">
+                            <h3><i class="fab fa-github"></i> Version Control</h3>
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <i class="fab fa-git-alt"></i>
+                                    <h4>Git</h4>
+                                    <p>Advanced version control and branching strategies</p>
+                                </div>
+                                <div class="tool-card">
+                                    <i class="fab fa-github"></i>
+                                    <h4>GitHub</h4>
+                                    <p>Project management and collaboration</p>
+                                    <a href="https://github.com/RamiroMolina21" class="github-link" target="_blank">View Profile</a>
+                                </div>
+                                <div class="tool-card">
+                                    <i class="fab fa-gitlab"></i>
+                                    <h4>GitLab</h4>
+                                    <p>CI/CD and DevOps integration</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tools-category">
+                            <h3><i class="fas fa-database"></i> Databases</h3>
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <i class="fas fa-database"></i>
+                                    <h4>MongoDB</h4>
+                                    <p>NoSQL database management</p>
+                                </div>
+                                <div class="tool-card">
+                                    <i class="fas fa-server"></i>
+                                    <h4>PostgreSQL</h4>
+                                    <p>Relational database expertise</p>
+                                </div>
+                                <div class="tool-card">
+                                    <i class="fas fa-fire"></i>
+                                    <h4>Firebase</h4>
+                                    <p>Real-time database and authentication</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tools-category">
+                            <h3><i class="fas fa-tools"></i> Development Tools</h3>
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <i class="fab fa-docker"></i>
+                                    <h4>Docker</h4>
+                                    <p>Containerization and deployment</p>
+                                </div>
+                                <div class="tool-card">
+                                    <i class="fab fa-aws"></i>
+                                    <h4>AWS</h4>
+                                    <p>Cloud services and infrastructure</p>
+                                </div>
+                                <div class="tool-card">
+                                    <i class="fas fa-terminal"></i>
+                                    <h4>VS Code</h4>
+                                    <p>Advanced IDE configuration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="contact" class="section">
+                    <h2>Contact</h2>
+                    <div class="contact-container">
+                        <div class="contact-form">
+                            <form id="contactForm">
+                                <input type="text" name="user_name" placeholder="Name" required>
+                                <input type="email" name="user_email" placeholder="Email" required>
+                                <textarea name="message" placeholder="Message" required></textarea>
+                                <button type="submit" id="submitBtn">
+                                    <span class="button-text">Send Message</span>
+                                    <span class="button-loader"></span>
+                                </button>
+                            </form>
+                            <div id="form-status" class="form-status"></div>
+                        </div>
+                        <div class="social-links">
+                            <h3>Connect with me</h3>
+                            <div class="social-grid">
+                                <a href="https://www.linkedin.com/in/ramiro-ernesto-molina-acosta-6a8b35326?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="social-card">
+                                    <i class="fab fa-linkedin"></i>
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a href="https://github.com/RamiroMolina21" target="_blank" class="social-card">
+                                    <i class="fab fa-github"></i>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="https://twitter.com/yourusername" target="_blank" class="social-card">
+                                    <i class="fab fa-twitter"></i>
+                                    <span>Twitter</span>
+                                </a>
+                                <a href="https://www.instagram.com/ramiro._.21?igsh=N3R5cTBlbms3Nmxv&utm_source=qr" target="_blank" class="social-card">
+                                    <i class="fab fa-instagram"></i>
+                                    <span>Instagram</span>
+                                </a>
+                                <a href="mailto:ramiro.molina@cecar.edu.co" class="social-card">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Email</span>
+                                </a>
+                                <a href="https://dev.to/yourusername" target="_blank" class="social-card">
+                                    <i class="fab fa-dev"></i>
+                                    <span>Dev.to</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
