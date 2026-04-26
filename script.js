@@ -47,7 +47,7 @@ for (let i = 0; i < particleCount; i++) {
 // Animation loop
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     particles.forEach(particle => {
         particle.update();
         particle.draw();
@@ -61,9 +61,100 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 animate();
 
+// Custom Cursor Logic
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+
+if (cursor && cursorFollower) {
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+
+        // Smooth follow for the follower
+        setTimeout(() => {
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        }, 50);
+    });
+
+    // Custom Cursor Hover Effect using Event Delegation
+    document.addEventListener('mouseover', (e) => {
+        const interactive = e.target.closest('a, button, input, textarea, .project-card, .skill-item, .tool-card, .social-card');
+        if (interactive) {
+            cursorFollower.classList.add('hover');
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        const interactive = e.target.closest('a, button, input, textarea, .project-card, .skill-item, .tool-card, .social-card');
+        if (interactive) {
+            cursorFollower.classList.remove('hover');
+        }
+    });
+}
+
+// Intersection Observer for Reveal Animations
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(section => {
+    observer.observe(section);
+});
+
+// Active Navigation Link on Scroll
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Typing effect for the hero title
+const typeTarget = document.querySelector('.type-effect');
+if (typeTarget) {
+    const textToType = typeTarget.textContent;
+    typeTarget.textContent = '';
+    let i = 0;
+
+    function typeWriter() {
+        if (i < textToType.length) {
+            typeTarget.textContent += textToType.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+
+    // Start typing after a short delay
+    setTimeout(typeWriter, 500);
+}
+
 // Smooth scrolling for navigation
 document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const section = document.querySelector(this.getAttribute('href'));
         section.scrollIntoView({ behavior: 'smooth' });
@@ -104,23 +195,6 @@ const projects = [
         repository: 'https://github.com/RamiroMolina21/Proyecto-Chatbot-Necli.git',
         url: 'https://github.com/RamiroMolina21/Proyecto-Chatbot-Necli.git'
     }
-    ,
-    {
-        title: 'AI Chat Assistant',
-        description: 'Intelligent chatbot powered by machine learning algorithms',
-        technologies: ['Python', 'TensorFlow', 'Flask'],
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        repository: 'https://github.com/RamiroMolina21/Proyecto-Chatbot-Necli.git',
-        url: 'https://github.com/RamiroMolina21/Proyecto-Chatbot-Necli.git'
-    }
-    ,
-    {
-        title: 'AI Chat Assistant',
-        description: 'Intelligent chatbot powered by machine learning algorithms',
-        technologies: ['Python', 'TensorFlow', 'Flask'],
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        repository: 'https://github.com/yourusername/ai-chat-assistant'
-    }
 ];
 
 // Add projects to the grid
@@ -145,57 +219,61 @@ projects.forEach(project => {
 
 // Sample skills data with logo images
 const skills = [
-    { 
+    {
         name: 'JavaScript',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'
     },
-    { 
+    {
         name: 'TypeScript',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg'
     },
-    { 
+    {
         name: 'React',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
     },
-    { 
+    {
         name: 'Node.js',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg'
     },
-    { 
+    {
         name: 'Python',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'
     },
-    { 
+    {
         name: 'Java',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'
     },
-    { 
+    {
         name: 'C#',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg'
     },
-    { 
+    {
         name: 'C++',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg'
     },
-    { 
+    {
         name: 'SQL',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg'
     },
-    { 
+    {
         name: 'MongoDB',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg'
     },
-    { 
+    {
         name: 'Git',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'
     },
-    { 
+    {
         name: 'Docker',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'
     },
-    { 
+    {
         name: 'AWS',
         image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg'
+    },
+    {
+        name: '.NET',
+        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg'
     }
 ];
 
@@ -221,13 +299,13 @@ const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const formStatus = document.getElementById('form-status');
 
-contactForm.addEventListener('submit', async function(e) {
+contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    
+
     // Show loading state
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
-    
+
     try {
         // Get form data
         const formData = {
@@ -246,7 +324,7 @@ contactForm.addEventListener('submit', async function(e) {
         // Show success message
         formStatus.textContent = "¡Mensaje enviado con éxito! Te responderé pronto.";
         formStatus.className = 'form-status success';
-        
+
         // Reset form
         this.reset();
     } catch (error) {

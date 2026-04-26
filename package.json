@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "description": "Interactive Portfolio Website",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve ."
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+} 
