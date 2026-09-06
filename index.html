@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Ramiro Molina</title>
+    <link rel="icon" type="image/jpeg" href="imgenes/logo.jpeg">
+    <link rel="apple-touch-icon" href="imgenes/logo.jpeg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Google Fonts: Inter and Fira Code -->
@@ -17,38 +19,139 @@
 </head>
 
 <body>
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
     <div class="container">
         <canvas id="portfolioCanvas"></canvas>
         <div class="content">
             <header class="glass-nav">
-                <div class="logo">RM<span>.</span></div>
-                <nav>
-                    <ul>
-                        <li><a href="#about" class="nav-link"><span class="nav-num">01.</span> About</a></li>
-                        <li><a href="#projects" class="nav-link"><span class="nav-num">02.</span> Projects</a></li>
-                        <li><a href="#skills" class="nav-link"><span class="nav-num">03.</span> Skills</a></li>
-                        <li><a href="#tools" class="nav-link"><span class="nav-num">04.</span> Tools</a></li>
-                        <li><a href="#contact" class="nav-link"><span class="nav-num">05.</span> Contact</a></li>
-                    </ul>
-                </nav>
+                <div class="nav-container">
+                    <a href="#hero" class="logo">RM<span>.</span></a>
+                    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                    <nav class="nav-menu" id="navMenu">
+                        <ul>
+                            <li><a href="#about" class="nav-link"><span class="nav-num">01.</span> About</a></li>
+                            <li><a href="#projects" class="nav-link"><span class="nav-num">02.</span> Projects</a></li>
+                            <li><a href="#skills" class="nav-link"><span class="nav-num">03.</span> Skills</a></li>
+                            <li><a href="#tools" class="nav-link"><span class="nav-num">04.</span> Tools</a></li>
+                            <li><a href="#contact" class="nav-link"><span class="nav-num">05.</span> Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </header>
             <main>
                 <section id="hero" class="hero-section">
-                    <p class="hero-greeting">Hi, my name is</p>
-                    <h1 class="hero-title type-effect">Ramiro Molina.</h1>
-                    <h2 class="hero-subtitle">I build things for the web.</h2>
-                    <p class="hero-desc">
-                        I'm a Systems Engineering student specializing in full-stack development, mobile apps, and
-                        machine learning. I'm passionate about building exceptional, high-quality digital experiences.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="cta-button">Check out my work!</a>
-                        <a href="assets/CV_Ramiro_Molina.pdf" download class="cta-button secondary">
-                            <i class="fas fa-file-download"></i> Download CV
-                        </a>
+                    <!-- Ambient Tech Background Grid & Glow -->
+                    <div class="hero-bg-grid" aria-hidden="true"></div>
+                    <div class="hero-glow" aria-hidden="true"></div>
+
+                    <div class="hero-container">
+                        <!-- LEFT COLUMN: Personal Brand & Intro -->
+                        <div class="hero-content">
+                            <div class="hero-tag">
+                                <span class="terminal-prompt">&gt;</span>
+                                <span class="tag-text">Hi, I'm</span>
+                                <span class="status-pulse"></span>
+                            </div>
+
+                            <h1 class="hero-name">
+                                <span class="name-first">RAMIRO</span>
+                                <span class="name-last">MOLINA<span class="accent-dot">.</span></span>
+                            </h1>
+
+                            <div class="hero-role-badge">
+                                <i class="fas fa-terminal"></i>
+                                <span>Systems Engineer &amp; Developer</span>
+                            </div>
+
+                            <p class="hero-tagline">
+                                Building high-impact digital experiences with code.
+                            </p>
+
+                            <div class="hero-tech-chips" aria-label="Specialization tags">
+                                <span class="tech-chip">// FULL-STACK</span>
+                                <span class="tech-chip">// MOBILE</span>
+                                <span class="tech-chip">// CLOUD</span>
+                                <span class="tech-chip">// APIs</span>
+                            </div>
+
+                            <div class="hero-buttons">
+                                <a href="#projects" class="hero-btn primary-btn">
+                                    <span>View Projects</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                                <a href="assets/CV_Ramiro_Molina.pdf" download class="hero-btn secondary-btn">
+                                    <i class="fas fa-file-download"></i>
+                                    <span>Download CV</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN: Tech Frame + Existing Photo Composition -->
+                        <div class="hero-visual">
+                            <div class="hero-visual-wrapper">
+                                <!-- Floating Mini Code Panel -->
+                                <div class="code-card floating-card">
+                                    <div class="code-card-header">
+                                        <div class="window-dots">
+                                            <span class="dot red"></span>
+                                            <span class="dot yellow"></span>
+                                            <span class="dot green"></span>
+                                        </div>
+                                        <span class="file-name">developer.ts</span>
+                                    </div>
+                                    <pre class="code-body"><code><span class="code-keyword">const</span> <span class="code-var">developer</span> = {
+  <span class="code-prop">name</span>: <span class="code-string">"Ramiro Molina"</span>,
+  <span class="code-prop">role</span>: <span class="code-string">"Systems Engineer"</span>,
+  <span class="code-prop">focus</span>: [<span class="code-string">"web"</span>, <span class="code-string">"mobile"</span>, <span class="code-string">"cloud"</span>]
+};</code></pre>
+                                </div>
+
+                                <!-- Photo Frame with HUD Tech Accents -->
+                                <div class="photo-frame-container">
+                                    <div class="photo-hud-corner corner-tl"></div>
+                                    <div class="photo-hud-corner corner-tr"></div>
+                                    <div class="photo-hud-corner corner-bl"></div>
+                                    <div class="photo-hud-corner corner-br"></div>
+
+                                    <div class="photo-hud-status">
+                                        <span class="status-indicator"></span>
+                                        <span class="status-text">SYS.ACTIVE // ENG</span>
+                                    </div>
+
+                                    <div class="photo-wrapper">
+                                        <img src="imgenes/imagen1.jpg" alt="Ramiro Molina" class="hero-photo">
+                                        <div class="photo-scanline" aria-hidden="true"></div>
+                                        <div class="photo-overlay-glow" aria-hidden="true"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Floating Mini Terminal / Progress Card -->
+                                <div class="terminal-card floating-card-delay">
+                                    <div class="terminal-card-header">
+                                        <i class="fas fa-circle-notch fa-spin"></i>
+                                        <span>building...</span>
+                                    </div>
+                                    <div class="terminal-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 80%;"></div>
+                                        </div>
+                                        <span class="progress-text">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Scroll Down Indicator -->
+                    <a href="#about" class="hero-scroll" aria-label="Scroll to About section">
+                        <span class="scroll-label">SCROLL</span>
+                        <span class="scroll-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </span>
+                    </a>
                 </section>
                 <section id="about" class="section reveal">
                     <h2 class="section-title"><span class="section-num">01.</span> About Me</h2>
@@ -57,8 +160,8 @@
                             <img src="imgenes/imagen1.jpg" alt="Profile Image">
                         </div>
                         <div class="about-content">
-                            <h3>Systems Engineer Student</h3>
-                            <p>I'm a Systems Engineering student(junior level).
+                            <h3>Systems Engineer</h3>
+                            <p>I'm a Systems Engineering.
                                 I'm passionate about problem-solving and continuous learning, always eager
                                 to expand my technical and personal skills. I have a growing interest
                                 in software development, API development, and cybersecurity,

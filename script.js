@@ -61,34 +61,36 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 animate();
 
-// Custom Cursor Logic
-const cursor = document.querySelector('.cursor');
-const cursorFollower = document.querySelector('.cursor-follower');
+// Mobile Hamburger Menu Logic
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navMenu = document.getElementById('navMenu');
 
-if (cursor && cursorFollower) {
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-
-        // Smooth follow for the follower
-        setTimeout(() => {
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
-        }, 50);
+if (hamburgerBtn && navMenu) {
+    hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = navMenu.classList.toggle('active');
+        hamburgerBtn.classList.toggle('active');
+        hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        hamburgerBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     });
 
-    // Custom Cursor Hover Effect using Event Delegation
-    document.addEventListener('mouseover', (e) => {
-        const interactive = e.target.closest('a, button, input, textarea, .project-card, .skill-item, .tool-card, .social-card');
-        if (interactive) {
-            cursorFollower.classList.add('hover');
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            hamburgerBtn.setAttribute('aria-label', 'Open navigation menu');
         }
     });
 
-    document.addEventListener('mouseout', (e) => {
-        const interactive = e.target.closest('a, button, input, textarea, .project-card, .skill-item, .tool-card, .social-card');
-        if (interactive) {
-            cursorFollower.classList.remove('hover');
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            hamburgerBtn.setAttribute('aria-label', 'Open navigation menu');
         }
     });
 }
@@ -152,20 +154,56 @@ if (typeTarget) {
     setTimeout(typeWriter, 500);
 }
 
-// Smooth scrolling for navigation
-document.querySelectorAll('nav a').forEach(anchor => {
+// Smooth scrolling for navigation & auto-close mobile menu
+document.querySelectorAll('nav a, a.logo, .hero-scroll, a.hero-btn[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const section = document.querySelector(this.getAttribute('href'));
-        section.scrollIntoView({ behavior: 'smooth' });
+        const targetId = this.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+            e.preventDefault();
+            const section = document.querySelector(targetId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Auto-close mobile menu on selection
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
+                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                hamburgerBtn.setAttribute('aria-label', 'Open navigation menu');
+            }
+        }
     });
 });
 
-// Sample projects data with images
+// Projects data with links and imagery
 const projects = [
     {
+        title: 'App Agendamiento CID Móvil',
+        description: 'Mobile application built with .NET MAUI for Language Center appointment scheduling, integrating SQL Server, Entity Framework, and ngrok tunnel.',
+        technologies: ['.NET MAUI', 'C#', 'SQL Server', 'Entity Framework'],
+        image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        repository: 'https://github.com/RamiroMolina21/AppAgendamiento-CID-movil',
+        url: 'https://github.com/RamiroMolina21/AppAgendamiento-CID-movil'
+    },
+    {
+        title: 'API REST Agendamiento CID',
+        description: 'RESTful API developed for the Language Center mobile scheduling system, built with ASP.NET Core, Entity Framework, and structured SQL Server database.',
+        technologies: ['ASP.NET Core', 'C#', 'Entity Framework', 'REST API'],
+        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        repository: 'https://github.com/RamiroMolina21/ApiRest-proyecto-Movil-Agendamiento-CID',
+        url: 'https://github.com/RamiroMolina21/ApiRest-proyecto-Movil-Agendamiento-CID'
+    },
+    {
+        title: 'Jesus Molina Official Website',
+        description: 'Official artist website for Jesus Molina, designed and developed using React and Vite with high performance, dynamic media, and sleek modern UI.',
+        technologies: ['React', 'Vite', 'JavaScript', 'CSS3'],
+        image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        repository: 'https://github.com/JMMusicEnt/Website-by-JesusMolina',
+        url: 'https://github.com/JMMusicEnt/Website-by-JesusMolina'
+    },
+    {
         title: 'Predictive Stress Detection on Students',
-        description: 'With the help ML, we developed a model that predicts the stress level of students.',
+        description: 'With the help of ML, we developed a predictive model to assess and monitor stress levels among university students.',
         technologies: ['Python', 'XGBoost', 'Scikit-learn'],
         image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         repository: 'https://github.com/RamiroMolina21/ProyectoEstresEstudiantil.git',
@@ -173,27 +211,11 @@ const projects = [
     },
     {
         title: 'Drowsiness Detector',
-        description: 'Using machine learning, we developed a model that detects drowsiness in drivers and alerts them when they are drowsy.',
+        description: 'Computer vision and machine learning model detecting driver fatigue and drowsiness in real time to issue critical alerts.',
         technologies: ['Python', 'ShapePredictor', 'OpenCV'],
         image: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
         repository: 'https://github.com/RamiroMolina21/Proyecto-Detector-de-Somnolencia.git',
         url: 'https://github.com/RamiroMolina21/Proyecto-Detector-de-Somnolencia.git'
-    },
-    {
-        title: 'Api Rest Necli',
-        description: 'With Entity Framework, we developed a REST API for a make transactions between users and banks.',
-        technologies: ['C#', 'Entity Framework', '.NET Core'],
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        repository: 'https://github.com/RamiroMolina21/Web-II-Necli2-.git',
-        url: 'https://github.com/RamiroMolina21/Web-II-Necli2-.git'
-    },
-    {
-        title: 'AI Chat Assistant',
-        description: 'Intelligent chatbot powered by machine learning algorithms',
-        technologies: ['Python', 'TensorFlow', 'Flask'],
-        image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        repository: 'https://github.com/RamiroMolina21/Proyecto-Chatbot-Necli.git',
-        url: 'https://github.com/RamiroMolina21/Proyecto-Chatbot-Necli.git'
     }
 ];
 
@@ -203,7 +225,7 @@ projects.forEach(project => {
     const projectCard = document.createElement('div');
     projectCard.className = 'project-card';
     projectCard.innerHTML = `
-        <a href="${project.url}" target="_blank" class="project-link">
+        <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link">
             <img src="${project.image}" alt="${project.title}" class="project-image">
             <div class="project-info">
                 <h3>${project.title}</h3>
