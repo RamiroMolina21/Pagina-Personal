@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="ado-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#512BD4"/>
+    </linearGradient>
+    <linearGradient id="ado-pipe" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00BCF2"/>
+      <stop offset="100%" stop-color="#64FFDA"/>
+    </linearGradient>
+  </defs>
+  <!-- Card Background -->
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="url(#ado-bg)"/>
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="none" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="2.5"/>
+  
+  <!-- Data Connection Cylinders -->
+  <!-- Upper database disk -->
+  <ellipse cx="64" cy="35" rx="30" ry="9" fill="#00BCF2" fill-opacity="0.85"/>
+  <ellipse cx="64" cy="35" rx="30" ry="9" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1.5"/>
+  
+  <!-- Middle Data Flow -->
+  <path d="M34 35 V46 C34 52 47 56 64 56 C81 56 94 52 94 46 V35" fill="none" stroke="#64FFDA" stroke-width="3" stroke-linecap="round"/>
+  <path d="M34 46 V57 C34 63 47 67 64 67 C81 67 94 63 94 57 V46" fill="none" stroke="#00BCF2" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Fast Lightning / Query Pulse connector -->
+  <path d="M60 41 L53 52 L65 52 L59 66 L75 51 L63 51 Z" fill="#FFF" fill-opacity="0.95"/>
+
+  <!-- ADO.NET Label Banner -->
+  <rect x="16" y="82" width="96" height="28" rx="8" fill="#0A1828" fill-opacity="0.9"/>
+  <text x="64" y="101" fill="#FFFFFF" font-family="'Inter', 'Segoe UI', -apple-system, sans-serif" font-weight="900" font-size="14.5" text-anchor="middle" letter-spacing="0.8">ADO.NET</text>
+</svg>

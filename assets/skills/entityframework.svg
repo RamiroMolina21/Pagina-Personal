@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="ef-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#68217A"/>
+      <stop offset="100%" stop-color="#512BD4"/>
+    </linearGradient>
+    <linearGradient id="ef-cyl" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A17BD9"/>
+      <stop offset="50%" stop-color="#D1B8F5"/>
+      <stop offset="100%" stop-color="#8661C5"/>
+    </linearGradient>
+  </defs>
+  <!-- Card Background -->
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="url(#ef-bg)"/>
+  <rect x="10" y="10" width="108" height="108" rx="26" fill="none" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="2.5"/>
+  
+  <!-- Database Discs (Top & Base) -->
+  <!-- Top Ellipse -->
+  <ellipse cx="64" cy="36" rx="34" ry="10" fill="url(#ef-cyl)"/>
+  <ellipse cx="64" cy="36" rx="34" ry="10" fill="none" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1.5"/>
+  
+  <!-- Middle Ring -->
+  <path d="M30 36 V48 C30 54 45 59 64 59 C83 59 98 54 98 48 V36" fill="none" stroke="#D1B8F5" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Lower Ring -->
+  <path d="M30 48 V60 C30 66 45 71 64 71 C83 71 98 66 98 60 V48" fill="none" stroke="#D1B8F5" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Entity Mapping Nodes Overlay -->
+  <circle cx="44" cy="54" r="5" fill="#64FFDA"/>
+  <circle cx="84" cy="54" r="5" fill="#00D2FF"/>
+  <line x1="48" y1="54" x2="80" y2="54" stroke="#64FFDA" stroke-width="2.5" stroke-dasharray="3,2"/>
+
+  <!-- EF Core Label Banner -->
+  <rect x="18" y="82" width="92" height="28" rx="8" fill="#121024" fill-opacity="0.9"/>
+  <text x="64" y="101" fill="#FFFFFF" font-family="'Inter', 'Segoe UI', -apple-system, sans-serif" font-weight="900" font-size="13" text-anchor="middle" letter-spacing="0.5">ENTITY FW</text>
+</svg>

@@ -239,63 +239,75 @@ projects.forEach(project => {
     projectsGrid.appendChild(projectCard);
 });
 
-// Sample skills data with logo images
+// Core skills data with imported original logos
 const skills = [
     {
         name: 'JavaScript',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'
+        image: 'assets/skills/javascript.svg'
     },
     {
         name: 'TypeScript',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg'
+        image: 'assets/skills/typescript.svg'
     },
     {
         name: 'React',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+        image: 'assets/skills/react.svg'
     },
     {
         name: 'Node.js',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg'
+        image: 'assets/skills/nodejs.svg'
     },
     {
         name: 'Python',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'
+        image: 'assets/skills/python.svg'
     },
     {
         name: 'Java',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'
+        image: 'assets/skills/java.svg'
     },
     {
         name: 'C#',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg'
+        image: 'assets/skills/csharp.svg'
     },
     {
         name: 'C++',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg'
+        image: 'assets/skills/cplusplus.svg'
     },
     {
         name: 'SQL',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg'
+        image: 'assets/skills/mysql.svg'
     },
     {
         name: 'MongoDB',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg'
+        image: 'assets/skills/mongodb.svg'
     },
     {
         name: 'Git',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'
+        image: 'assets/skills/git.svg'
     },
     {
         name: 'Docker',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg'
+        image: 'assets/skills/docker.svg'
     },
     {
         name: 'AWS',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg'
+        image: 'assets/skills/aws.svg'
     },
     {
         name: '.NET',
-        image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg'
+        image: 'assets/skills/dotnet.svg'
+    },
+    {
+        name: 'ASP.NET',
+        image: 'assets/skills/aspnet.svg'
+    },
+    {
+        name: 'Entity Framework',
+        image: 'assets/skills/entityframework.svg'
+    },
+    {
+        name: 'ADO.NET',
+        image: 'assets/skills/adonet.svg'
     }
 ];
 
