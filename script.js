@@ -219,25 +219,187 @@ const projects = [
     }
 ];
 
-// Add projects to the grid
-const projectsGrid = document.querySelector('.projects-grid');
-projects.forEach(project => {
-    const projectCard = document.createElement('div');
-    projectCard.className = 'project-card';
-    projectCard.innerHTML = `
-        <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link">
-            <img src="${project.image}" alt="${project.title}" class="project-image">
-            <div class="project-info">
-                <h3>${project.title}</h3>
-                <p>${project.description}</p>
-                <div class="technologies">
-                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+// Initialize Projects Carousel
+const projectsTrack = document.getElementById('projectsTrack');
+const carouselContainer = document.getElementById('projectsCarouselContainer');
+const carouselDotsContainer = document.getElementById('carouselDots');
+const prevBtn = document.getElementById('projectPrevBtn');
+const nextBtn = document.getElementById('projectNextBtn');
+
+if (projectsTrack && carouselContainer) {
+
+    // Render project cards
+    projects.forEach((project, index) => {
+        const projectCard = document.createElement('div');
+        projectCard.className = 'project-card';
+        projectCard.setAttribute('data-index', index);
+        projectCard.innerHTML = `
+            <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="${project.title}">
+                <div class="project-image-wrap">
+                    <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy">
+                    <div class="project-image-overlay"></div>
+                    <div class="project-badge-action" title="Open Project">
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+                    </div>
                 </div>
-            </div>
-        </a>
-    `;
-    projectsGrid.appendChild(projectCard);
-});
+                <div class="project-info">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <div class="technologies">
+                        ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                </div>
+            </a>
+        `;
+        projectsTrack.appendChild(projectCard);
+
+        // Generate dot indicator
+        if (carouselDotsContainer) {
+            const dot = document.createElement('button');
+            dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+            dot.setAttribute('role', 'tab');
+            dot.setAttribute('aria-label', `Slide ${index + 1}`);
+            dot.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+            dot.addEventListener('click', () => {
+                scrollToSlide(index);
+            });
+            carouselDotsContainer.appendChild(dot);
+        }
+    });
+
+    const cards = projectsTrack.querySelectorAll('.project-card');
+
+    // Get current active slide index based on scroll position
+    function getCurrentIndex() {
+        const scrollPos = carouselContainer.scrollLeft;
+        const trackOffset = projectsTrack.offsetLeft;
+        let minDiff = Infinity;
+        let activeIdx = 0;
+
+        cards.forEach((card, idx) => {
+            const cardPos = card.offsetLeft - trackOffset;
+            const diff = Math.abs(cardPos - scrollPos);
+            if (diff < minDiff) {
+                minDiff = diff;
+                activeIdx = idx;
+            }
+        });
+        return activeIdx;
+    }
+
+    // Update dot indicators
+    function updateActiveState(index) {
+        if (carouselDotsContainer) {
+            const dots = carouselDotsContainer.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, idx) => {
+                const isActive = idx === index;
+                dot.classList.toggle('active', isActive);
+                dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        }
+    }
+
+    // Scroll to specific slide
+    function scrollToSlide(index) {
+        if (index < 0) index = cards.length - 1;
+        if (index >= cards.length) index = 0;
+
+        const targetCard = cards[index];
+        if (targetCard) {
+            const scrollLeft = targetCard.offsetLeft - projectsTrack.offsetLeft;
+            carouselContainer.scrollTo({
+                left: scrollLeft,
+                behavior: 'smooth'
+            });
+            updateActiveState(index);
+        }
+    }
+
+    // Previous button click
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const currentIndex = getCurrentIndex();
+            const targetIndex = currentIndex > 0 ? currentIndex - 1 : cards.length - 1;
+            scrollToSlide(targetIndex);
+        });
+    }
+
+    // Next button click
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const currentIndex = getCurrentIndex();
+            const targetIndex = currentIndex < cards.length - 1 ? currentIndex + 1 : 0;
+            scrollToSlide(targetIndex);
+        });
+    }
+
+    // Sync state on user scroll/swipe
+    let scrollAnimId;
+    carouselContainer.addEventListener('scroll', () => {
+        if (scrollAnimId) cancelAnimationFrame(scrollAnimId);
+        scrollAnimId = requestAnimationFrame(() => {
+            const activeIdx = getCurrentIndex();
+            updateActiveState(activeIdx);
+        });
+    }, { passive: true });
+
+    // Keyboard navigation (Arrow keys when focused)
+    carouselContainer.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const idx = getCurrentIndex();
+            scrollToSlide(idx > 0 ? idx - 1 : cards.length - 1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            const idx = getCurrentIndex();
+            scrollToSlide(idx < cards.length - 1 ? idx + 1 : 0);
+        }
+    });
+
+    // Desktop Mouse Drag to Scroll
+    let isMouseDown = false;
+    let startX = 0;
+    let scrollStartLeft = 0;
+    let hasDragged = false;
+
+    carouselContainer.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        hasDragged = false;
+        startX = e.pageX - carouselContainer.offsetLeft;
+        scrollStartLeft = carouselContainer.scrollLeft;
+        carouselContainer.classList.add('is-dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        const currentX = e.pageX - carouselContainer.offsetLeft;
+        const walk = currentX - startX;
+        if (Math.abs(walk) > 6) {
+            hasDragged = true;
+        }
+        carouselContainer.scrollLeft = scrollStartLeft - walk;
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (isMouseDown) {
+            isMouseDown = false;
+            carouselContainer.classList.remove('is-dragging');
+            setTimeout(() => {
+                const activeIdx = getCurrentIndex();
+                updateActiveState(activeIdx);
+            }, 60);
+        }
+    });
+
+    // Prevent inadvertent link navigation on drag release
+    carouselContainer.addEventListener('click', (e) => {
+        if (hasDragged) {
+            e.preventDefault();
+            e.stopPropagation();
+            hasDragged = false;
+        }
+    }, true);
+}
 
 // Core skills data with imported original logos
 const skills = [

@@ -192,10 +192,29 @@
                         </div>
                     </div>
                 </section>
-                <section id="projects" class="section reveal">
-                    <h2 class="section-title"><span class="section-num">02.</span> Some Things I've Built</h2>
-                    <div class="projects-grid">
-                        <!-- Project cards will be added dynamically -->
+                <section id="projects" class="section reveal projects-section">
+                    <div class="projects-header-row">
+                        <h2 class="section-title"><span class="section-num">02.</span> Some Things I've Built</h2>
+                        <div class="carousel-controls" aria-label="Projects carousel navigation">
+                            <button class="carousel-btn prev-btn" id="projectPrevBtn" aria-label="Previous project">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-btn next-btn" id="projectNextBtn" aria-label="Next project">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="projects-carousel-wrapper">
+                        <div class="projects-carousel-container" id="projectsCarouselContainer" tabindex="0" role="region" aria-label="Projects carousel">
+                            <div class="projects-track" id="projectsTrack">
+                                <!-- Project cards will be added dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Project slide dots">
+                        <!-- Dots dynamically generated -->
                     </div>
                 </section>
                 <section id="skills" class="section reveal">
